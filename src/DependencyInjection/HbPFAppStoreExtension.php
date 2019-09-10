@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Hanaboso\HbPFApplication\DependencyInjection;
+namespace Hanaboso\HbPFAppStore\DependencyInjection;
 
 use Exception;
 use RuntimeException;
@@ -13,9 +13,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Class HbPFApplicationExtension
  *
- * @package Hanaboso\HbPFApplication\DependencyInjection
+ * @package Hanaboso\HbPFAppStore\DependencyInjection
  */
-class HbPFApplicationExtension extends Extension implements PrependExtensionInterface
+class HbPFAppStoreExtension extends Extension implements PrependExtensionInterface
 {
 
     /**
