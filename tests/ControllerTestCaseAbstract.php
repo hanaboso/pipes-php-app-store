@@ -76,7 +76,7 @@ abstract class ControllerTestCaseAbstract extends WebTestCase
     {
         self::$client = self::createClient([], []);
 
-        $this->dm = self::$container->get('doctrine_mongodb.odm.default_document_manager');
+        $this->dm = self::getContainer()->get('doctrine_mongodb.odm.default_document_manager');
         $this->dm->getConfiguration()->setDefaultDB($this->getMongoDatabaseName());
 
         $documents = $this->dm->getMetadataFactory()->getAllMetadata();

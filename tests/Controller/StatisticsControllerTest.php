@@ -7,6 +7,7 @@ use Exception;
 use Hanaboso\HbPFAppStore\Handler\StatisticsHandler;
 use Hanaboso\PipesPhpSdk\Application\Document\ApplicationInstall;
 use Hanaboso\Utils\Date\DateTimeUtils;
+use Hanaboso\Utils\File\File;
 use HbPFAppStoreTests\ControllerTestCaseAbstract;
 
 /**
@@ -36,7 +37,7 @@ final class StatisticsControllerTest extends ControllerTestCaseAbstract
         $response = self::$client->getResponse();
 
         self::assertEquals(200, $response->getStatusCode());
-        self::assertEquals($response->getContent(), file_get_contents(sprintf('%s/data/applications.json', __DIR__)));
+        self::assertEquals($response->getContent(), File::getContent(sprintf('%s/data/applications.json', __DIR__)));
     }
 
     /**
@@ -81,7 +82,7 @@ final class StatisticsControllerTest extends ControllerTestCaseAbstract
         $response = self::$client->getResponse();
 
         self::assertEquals(200, $response->getStatusCode());
-        self::assertEquals($response->getContent(), file_get_contents(sprintf('%s/data/appUsers.json', __DIR__)));
+        self::assertEquals($response->getContent(), File::getContent(sprintf('%s/data/appUsers.json', __DIR__)));
     }
 
     /**
@@ -135,7 +136,7 @@ final class StatisticsControllerTest extends ControllerTestCaseAbstract
     {
         $mock = self::createPartialMock(StatisticsHandler::class, [$fn]);
         $mock->expects(self::any())->method($fn)->willThrowException(new MongoDBException());
-        self::$container->set('hbpf._application.handler.statistics', $mock);
+        self::getContainer()->set('hbpf._application.handler.statistics', $mock);
     }
 
 }
