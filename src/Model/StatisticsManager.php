@@ -37,7 +37,7 @@ final class StatisticsManager
      */
     public function getApplicationsBasicData(): array
     {
-        return $this->repository->getApplicationsCount() ?? [];
+        return $this->repository->getApplicationsCount();
     }
 
     /**
@@ -48,7 +48,7 @@ final class StatisticsManager
      */
     public function getApplicationsUsers(string $application): array
     {
-        return $this->repository->getApplicationsCountDetails($application) ?? [];
+        return $this->repository->getApplicationsCountDetails($application);
     }
 
 }

@@ -6,7 +6,6 @@ use Hanaboso\HbPFAppStore\HbPFAppStoreBundle;
 use Hanaboso\PipesPhpSdk\HbPFApplicationBundle\HbPFApplicationBundle;
 use Hanaboso\PipesPhpSdk\HbPFConnectorBundle\HbPFConnectorBundle;
 use Hanaboso\PipesPhpSdk\HbPFCustomNodeBundle\HbPFCustomNodeBundle;
-use Hanaboso\PipesPhpSdk\HbPFJoinerBundle\HbPFJoinerBundle;
 use Hanaboso\PipesPhpSdk\HbPFTableParserBundle\HbPFTableParserBundle;
 use Hanaboso\RestBundle\RestBundle;
 use RabbitMqBundle\RabbitMqBundle;
@@ -27,7 +26,6 @@ return [
     HbPFApplicationBundle::class     => ['all' => TRUE],
     HbPFConnectorBundle::class       => ['all' => TRUE],
     HbPFCustomNodeBundle::class      => ['all' => TRUE],
-    HbPFJoinerBundle::class          => ['all' => TRUE],
     HbPFTableParserBundle::class     => ['all' => TRUE],
     RabbitMqBundle::class            => ['all' => TRUE],
     RestBundle::class                => ['all' => TRUE],
