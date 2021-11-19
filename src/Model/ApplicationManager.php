@@ -52,6 +52,15 @@ final class ApplicationManager extends SdkApplicationManager
     }
 
     /**
+     * @return int
+     * @throws MongoDBException
+     */
+    public function getAllInstalledApplications(): int
+    {
+        return $this->repository->getInstalledApplicationsCount();
+    }
+
+    /**
      * @param string $key
      * @param string $user
      *

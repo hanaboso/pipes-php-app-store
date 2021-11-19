@@ -63,6 +63,15 @@ final class ApplicationHandler
     }
 
     /**
+     * @return int
+     * @throws MongoDBException
+     */
+    public function getCountInstalledApplications(): int
+    {
+        return $this->applicationManager->getAllInstalledApplications();
+    }
+
+    /**
      * @param string $key
      * @param string $user
      *

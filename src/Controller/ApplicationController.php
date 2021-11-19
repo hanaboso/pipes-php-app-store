@@ -2,10 +2,13 @@
 
 namespace Hanaboso\HbPFAppStore\Controller;
 
+use Doctrine\ODM\MongoDB\MongoDBException;
 use Hanaboso\HbPFAppStore\Handler\ApplicationHandler;
+use Hanaboso\HbPFAppStore\Utils\JWTParser;
 use Hanaboso\PipesPhpSdk\Application\Exception\ApplicationInstallException;
 use Hanaboso\Utils\System\ControllerUtils;
 use Hanaboso\Utils\Traits\ControllerTrait;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +25,8 @@ final class ApplicationController
 {
 
     use ControllerTrait;
+
+    private const APPLICATIONS = 'applications';
 
     /**
      * ApplicationController constructor.
@@ -42,6 +47,8 @@ final class ApplicationController
     public function getUsersApplicationAction(string $user): Response
     {
         try {
+            $this->verifyLicense();
+
             return $this->getResponse($this->applicationHandler->getApplicationsByUser($user));
         } catch (Throwable $t) {
             return $this->getErrorResponse($t);
@@ -59,6 +66,8 @@ final class ApplicationController
     public function getApplicationDetailAction(string $key, string $user): Response
     {
         try {
+            $this->verifyLicense();
+
             return $this->getResponse($this->applicationHandler->getApplicationByKeyAndUser($key, $user));
         } catch (ApplicationInstallException $e) {
             return $this->getErrorResponse($e, 404, ControllerUtils::NOT_FOUND);
@@ -78,6 +87,8 @@ final class ApplicationController
     public function installApplicationAction(string $key, string $user): Response
     {
         try {
+            $this->verifyLicense();
+
             return $this->getResponse($this->applicationHandler->installApplication($key, $user));
         } catch (ApplicationInstallException $e) {
             return $this->getErrorResponse($e, 404, ControllerUtils::NOT_FOUND);
@@ -97,6 +108,8 @@ final class ApplicationController
     public function uninstallApplicationAction(string $key, string $user): Response
     {
         try {
+            $this->verifyLicense();
+
             return $this->getResponse($this->applicationHandler->uninstallApplication($key, $user));
         } catch (ApplicationInstallException $e) {
             return $this->getErrorResponse($e, 404, ControllerUtils::NOT_FOUND);
@@ -117,6 +130,8 @@ final class ApplicationController
     public function updateApplicationSettingsAction(Request $request, string $key, string $user): Response
     {
         try {
+            $this->verifyLicense();
+
             return $this->getResponse(
                 $this->applicationHandler->updateApplicationSettings($key, $user, $request->request->all()),
             );
@@ -139,6 +154,8 @@ final class ApplicationController
     public function saveApplicationPasswordAction(Request $request, string $key, string $user): Response
     {
         try {
+            $this->verifyLicense();
+
             return $this->getResponse(
                 $this->applicationHandler->updateApplicationPassword($key, $user, $request->request->all()),
             );
@@ -146,6 +163,17 @@ final class ApplicationController
             return $this->getErrorResponse($e, 404, ControllerUtils::NOT_FOUND);
         } catch (Throwable $e) {
             return $this->getErrorResponse($e);
+        }
+    }
+
+    /**
+     * @throws MongoDBException
+     */
+    private function verifyLicense(): void
+    {
+        $apps = $this->applicationHandler->getCountInstalledApplications();
+        if (JWTParser::verifyAndReturn()[self::APPLICATIONS] < $apps) {
+            throw new LogicException('Your license is not valid or application limit is exceeded', 401);
         }
     }
 

@@ -5,7 +5,9 @@
     "license": "GPL-3.0-or-later",
     "require": {
         "php": "^8.0",
-        "hanaboso/pipes-php-sdk": "^1.6"
+        "hanaboso/pipes-php-sdk": "^1.6",
+        "hanaboso/utils": "^1.1",
+        "lcobucci/jwt": "^4.1"
     },
     "require-dev": {
         "hanaboso/php-check-utils": "^1.3",

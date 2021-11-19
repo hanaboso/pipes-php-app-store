@@ -41,6 +41,20 @@ final class ApplicationHandlerTest extends DatabaseTestCaseAbstract
     }
 
     /**
+     * @covers \Hanaboso\HbPFAppStore\Handler\ApplicationHandler::getCountInstalledApplications
+     *
+     * @throws Exception
+     */
+    public function testGetCountInstalledApplications(): void
+    {
+        $this->createApplicationInstall('null');
+        $this->createApplicationInstall('webhook');
+        $result = $this->handler->getCountInstalledApplications();
+
+        self::assertEquals(2, $result);
+    }
+
+    /**
      * @covers \Hanaboso\HbPFAppStore\Handler\ApplicationHandler::getApplicationByKeyAndUser
      *
      * @throws Exception

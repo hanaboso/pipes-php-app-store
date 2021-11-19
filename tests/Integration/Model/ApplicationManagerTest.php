@@ -41,6 +41,19 @@ final class ApplicationManagerTest extends DatabaseTestCaseAbstract
     /**
      * @throws Exception
      */
+    public function testGetAllInstalledApplications(): void
+    {
+        $this->createApp();
+        $this->createApp();
+
+        $installedApp = $this->applicationManager->getAllInstalledApplications();
+
+        self::assertEquals(2, $installedApp);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function testGetInstalledApplicationDetail(): void
     {
         $this->createApp();
