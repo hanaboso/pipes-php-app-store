@@ -42,22 +42,6 @@ final class ApplicationControllerTest extends ControllerTestCaseAbstract
 
     /**
      * @covers \Hanaboso\HbPFAppStore\Controller\ApplicationController::getUsersApplicationAction
-     * @covers \Hanaboso\HbPFAppStore\Controller\ApplicationController::verifyLicense
-     *
-     * @throws Exception
-     */
-    public function testVerifyLicense(): void
-    {
-        $this->mockApplicationHandler(Json::decode(File::getContent(sprintf('%s/data/data.json', __DIR__))), TRUE);
-
-        self::$client->request('GET', '/applications/users/bar');
-        $response = self::$client->getResponse();
-
-        self::assertEquals('500', $response->getStatusCode());
-    }
-
-    /**
-     * @covers \Hanaboso\HbPFAppStore\Controller\ApplicationController::getUsersApplicationAction
      *
      * @throws Exception
      */
@@ -257,11 +241,8 @@ final class ApplicationControllerTest extends ControllerTestCaseAbstract
 
     /**
      * @param mixed[] $returnValue
-     * @param bool    $invalidLicense
-     *
-     * @throws Exception
      */
-    private function mockApplicationHandler(array $returnValue = [], bool $invalidLicense = FALSE): void
+    private function mockApplicationHandler(array $returnValue = []): void
     {
         $handler = $this->getMockBuilder(ApplicationHandler::class)
             ->disableOriginalConstructor()
@@ -280,10 +261,6 @@ final class ApplicationControllerTest extends ControllerTestCaseAbstract
                 static function (): void {
                 },
             );
-        if ($invalidLicense) {
-            $handler->method('getCountInstalledApplications')
-                ->willReturn(4);
-        }
 
         $container = self::$client->getContainer();
         $container->set('hbpf._application.handler.application', $handler);
