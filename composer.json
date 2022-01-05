@@ -1,8 +1,8 @@
 {
     "name": "hanaboso/app-store",
     "description": "App store for PipesFramework",
-    "version": "1.6.2",
     "license": "Apache-2.0",
+    "version": "1.6.2",
     "require": {
         "php": "^8.0",
         "hanaboso/pipes-php-sdk": "^1.6"
@@ -14,6 +14,15 @@
         "symfony/security-bundle": "^v5.3",
         "symfony/serializer": "^v5.3"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../pipes-php-sdk",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Hanaboso\\HbPFAppStore\\": "src/"
@@ -23,14 +32,5 @@
         "psr-4": {
             "HbPFAppStoreTests\\": "tests/"
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../pipes-php-sdk",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+    }
 }
