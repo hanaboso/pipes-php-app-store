@@ -16,8 +16,3 @@ services:
             - '@hbpf.application.loader'
             - '@annotations.cached_reader'
             - '@hbpf._application.manager.webhook'
-            -
-    hbpf._application.manager.statistics:
-        class: Hanaboso\HbPFAppStore\Model\StatisticsManager
-        arguments:
-            - '@doctrine_mongodb.odm.default_document_manager'
