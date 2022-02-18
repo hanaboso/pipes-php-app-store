@@ -7,7 +7,7 @@ services:
         arguments:
             - '@doctrine_mongodb.odm.default_document_manager'
             - '@hbpf.transport.curl_manager'
-            - '%backend_host%'
+            - '%backendHost%'
 
     hbpf._application.manager.application:
         class: Hanaboso\HbPFAppStore\Model\ApplicationManager

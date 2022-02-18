@@ -12,7 +12,7 @@ framework:
         strict_requirements: ~
 
 parameters:
-    backend_host: 127.0.0.9
+    backendHost: 127.0.0.9
     # Base params
     locale: en
 
