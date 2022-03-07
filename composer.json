@@ -2,10 +2,10 @@
     "name": "hanaboso/app-store",
     "description": "App store for PipesFramework",
     "license": "Apache-2.0",
-    "version": "1.6.2",
+    "version": "2.0.0",
     "require": {
-        "php": "^8.0",
-        "hanaboso/pipes-php-sdk": "^1.6"
+        "php": "^8.1",
+        "hanaboso/pipes-php-sdk": "^2.0"
     },
     "require-dev": {
         "hanaboso/php-check-utils": "^1.4",
