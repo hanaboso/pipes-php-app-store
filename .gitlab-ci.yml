@@ -15,6 +15,7 @@ app-store:git-mirror:
 
   variables:
     MIRROR_REPOSITORY_NAME: app-store
+    MIRROR_TRIGGER_REPO_VAR: hanaboso-pipes-php-app-store
 
   extends:
     - .base-git-mirror
