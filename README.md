@@ -1,5 +1,3 @@
-Repository archived. Please use: [https://github.com/Orchesty/orchesty-php-app-store](https://github.com/Orchesty/orchesty-php-app-store)
-
 # Pipes App Store
 
 ## Popis služby
